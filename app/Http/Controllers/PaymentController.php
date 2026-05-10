@@ -2,64 +2,82 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Models\Payment;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class PaymentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $payments = Payment::with(['subscription.member', 'subscription.plan'])
+            ->latest()
+            ->paginate(10);
+
+        $totalRevenue = Payment::sum('amount');
+
+        return view('payments.index', compact('payments', 'totalRevenue'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        // Get subscriptions that don't have a payment yet
+        $subscriptions = Subscription::with(['member', 'plan'])
+            ->doesntHave('payment')
+            ->latest()
+            ->get();
+
+        $preselected = request('subscription_id');
+
+        return view('payments.create', compact('subscriptions', 'preselected'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'subscription_id' => 'required|exists:subscriptions,id|unique:payments,subscription_id',
+            'amount'          => 'required|numeric|min:0',
+            'method'          => 'required|in:Cash,Mobile Money,Card',
+            'payment_date'    => 'required|date',
+        ]);
+
+        Payment::create($validated);
+
+        return redirect()->route('payments.index')
+            ->with('success', 'Payment recorded successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function show(Payment $payment)
     {
-        //
+        return redirect()->route('payments.index');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function edit(Payment $payment)
     {
-        //
+        $subscriptions = Subscription::with(['member', 'plan'])->latest()->get();
+        return view('payments.edit', compact('payment', 'subscriptions'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Payment $payment)
     {
-        //
+        $validated = $request->validate([
+            'subscription_id' => 'required|exists:subscriptions,id|unique:payments,subscription_id,' . $payment->id,
+            'amount'          => 'required|numeric|min:0',
+            'method'          => 'required|in:Cash,Mobile Money,Card',
+            'payment_date'    => 'required|date',
+        ]);
+
+        $payment->update($validated);
+
+        return redirect()->route('payments.index')
+            ->with('success', 'Payment updated successfully.');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function destroy(Payment $payment)
     {
-        //
+        $payment->delete();
+
+        return redirect()->route('payments.index')
+            ->with('success', 'Payment deleted successfully.');
     }
 }

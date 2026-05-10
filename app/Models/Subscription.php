@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Subscription extends Model
 {
     protected $fillable = [
-        'member_id', 'membership_plan_id', 'start_date', 'end_date',
+        'member_id',
+        'membership_plan_id',
+        'start_date',
+        'end_date',
     ];
 
     protected $casts = [
@@ -22,7 +25,7 @@ class Subscription extends Model
 
     public function plan()
     {
-        return $this->belongsTo(MembershipPlan::class);
+        return $this->belongsTo(MembershipPlan::class, 'membership_plan_id');
     }
 
     public function payment()
@@ -32,6 +35,8 @@ class Subscription extends Model
 
     public function getStatusAttribute(): string
     {
-        return $this->end_date->isFuture() ? 'Active' : 'Expired';
+        return $this->end_date->isFuture()
+            ? 'Active'
+            : 'Expired';
     }
 }
