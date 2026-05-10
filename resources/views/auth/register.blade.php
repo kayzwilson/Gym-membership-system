@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Create Account — IronPulse</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="icon" type="image/png" href="{{ asset('images/gym-logo.png') }}">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     <style>
@@ -312,18 +313,11 @@
         <div class="register-card">
 
             <div class="logo-block">
-                <div class="logo-mark">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M18 8h1a4 4 0 0 1 0 8h-1"/>
-                        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/>
-                        <line x1="6" y1="1" x2="6" y2="4"/>
-                        <line x1="10" y1="1" x2="10" y2="4"/>
-                        <line x1="14" y1="1" x2="14" y2="4"/>
-                    </svg>
-                </div>
-                <span class="logo-name">Iron<span>Pulse</span></span>
-                <span class="logo-sub">Create account</span>
-            </div>
+    <img src="{{ asset('images/gym-logo.png') }}" alt="IronPulse"
+         style="width:64px; height:64px; border-radius:14px; object-fit:cover; margin-bottom:14px;">
+    <span class="logo-name">Iron<span>Pulse</span></span>
+    <span class="logo-sub">Admin Portal</span>
+</div>
 
             <div class="divider"></div>
 

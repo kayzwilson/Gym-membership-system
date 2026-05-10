@@ -478,10 +478,15 @@
     {{-- SIDEBAR --}}
     <aside class="sidebar">
 
-        <div class="sidebar-logo">
-            <a href="{{ route('dashboard') }}" class="logo-text">Iron<span>Pulse</span></a>
-            <span class="logo-tagline">Gym Management</span>
-        </div>
+       <div class="sidebar-logo">
+          <a href="{{ route('dashboard') }}" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
+              <img src="{{ asset('images/gym-logo.png') }}" alt="IronPulse" style="width:36px; height:36px; border-radius:8px; object-fit:cover;">
+             <div>
+               <span class="logo-text">Iron<span>Pulse</span></span>
+               <span class="logo-tagline" style="display:block;">Gym Management</span>
+             </div>
+          </a>
+       </div>
 
         <nav class="sidebar-nav">
 

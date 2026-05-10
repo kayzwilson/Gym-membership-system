@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="{{ asset('images/gym-logo.png') }}">
     <title>IronPulse — Gym Management</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -437,7 +438,11 @@
 
     {{-- NAV --}}
     <nav>
-        <a href="/" class="nav-logo">Iron<span>Pulse</span></a>
+        <a href="/" style="display:flex; align-items:center; gap:10px; text-decoration:none;">
+    <img src="{{ asset('images/gym-logo.png') }}" alt="IronPulse"
+         style="width:32px; height:32px; border-radius:7px; object-fit:cover;">
+    <span class="nav-logo">Iron<span>Pulse</span></span>
+</a>
         <ul class="nav-links">
             <li><a href="#features">Features</a></li>
             <li><a href="#about">About</a></li>
