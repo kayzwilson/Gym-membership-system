@@ -10,7 +10,15 @@ class Member extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'name', 'email', 'phone', 'gender', 'dob',
+        'name',
+        'email',
+        'phone',
+        'gender',
+        'dob',
+    ];
+
+    protected $casts = [
+        'dob' => 'date',
     ];
 
     public function subscriptions()
