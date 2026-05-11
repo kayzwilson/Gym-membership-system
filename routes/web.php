@@ -14,11 +14,11 @@ Route::get('/', function () {
 
 Route::middleware(['auth'])->group(function () {
 
-    // Dashboard
+    // Dashboard - all roles
     Route::get('/dashboard', [DashboardController::class, 'index'])
         ->name('dashboard');
 
-    // Profile
+    // Profile - all roles
     Route::get('/profile', [ProfileController::class, 'edit'])
         ->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])
@@ -26,17 +26,18 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
 
-    // Members
-    Route::resource('members', MemberController::class);
+    // Admin only
+    Route::middleware(['admin'])->group(function () {
+        Route::resource('membership_plans', MembershipPlanController::class);
+        Route::resource('payments', PaymentController::class);
+    });
 
-    // Membership Plans
-    Route::resource('membership_plans', MembershipPlanController::class);
+    // Admin and Staff
+    Route::middleware(['staff'])->group(function () {
+        Route::resource('members', MemberController::class);
+        Route::resource('attendance', AttendanceController::class);
+    });
 
-    // Payments
-    Route::resource('payments', PaymentController::class);
-
-    // Attendance
-    Route::resource('attendance', AttendanceController::class);
 });
 
 require __DIR__.'/auth.php';

@@ -26,66 +26,96 @@
     <div class="flex h-screen overflow-hidden">
         <div class="w-64 bg-white shadow-lg flex flex-col" style="background: linear-gradient(180deg, #FF6B35 0%, #FF1493 100%);">
             
-            {{-- Logo --}}
-            <div class="p-6 text-center border-b border-white border-opacity-30">
-                <div class="text-white text-2xl font-bold">
-                    <i class="fas fa-dumbbell mr-2"></i>
-                    GymPro
-                </div>
-                <p class="text-white text-opacity-80 text-xs mt-1">Membership System</p>
+          {{-- Logo --}}
+{{-- Logo --}}
+<div class="p-6 text-center border-b border-white border-opacity-30" style="background: rgba(0,0,0,0.3)">
+    <div class="flex items-center justify-center space-x-3">
+        <div class="w-12 h-12 rounded-xl flex items-center justify-center shadow-lg"
+             style="background: rgba(255,255,255,0.2); border: 2px solid rgba(255,255,255,0.5)">
+            <i class="fas fa-dumbbell text-white text-xl"></i>
+        </div>
+        <div class="text-left">
+            <h1 class="text-white font-black text-xl tracking-wide">Shadex<span style="color: #FFD700">Gym</span></h1>
+            <div class="flex items-center space-x-1 mt-0.5">
+                <div class="w-2 h-2 rounded-full bg-green-400"></div>
+                <p class="text-white text-opacity-80 text-xs">System Online</p>
             </div>
+        </div>
+    </div>
+    <div class="mt-4 px-3 py-2 rounded-lg" style="background: rgba(255,255,255,0.15)">
+        <p class="text-white text-opacity-90 text-xs font-semibold tracking-widest uppercase">
+            Membership Management
+        </p>
+    </div>
+</div>
 
             {{-- User Info --}}
-            <div class="p-4 border-b border-white border-opacity-30">
-                <div class="flex items-center space-x-3">
-                    <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center">
-                        <i class="fas fa-user text-orange-500"></i>
-                    </div>
-                    <div>
-                        <p class="text-white font-semibold text-sm">{{ auth()->user()->name }}</p>
-                        <p class="text-white text-opacity-70 text-xs capitalize">{{ auth()->user()->role }}</p>
-                    </div>
+<div class="p-4 border-b border-white border-opacity-30">
+    <div class="flex items-center space-x-3">
+        <div class="relative">
+            @if(auth()->user()->profile_photo)
+                <img src="{{ asset('storage/' . auth()->user()->profile_photo) }}"
+                     alt="Profile"
+                     class="w-12 h-12 rounded-full object-cover border-2 border-white">
+            @else
+                <div class="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+                    <span class="font-bold text-lg" style="color: #FF6B35">
+                        {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                    </span>
                 </div>
-            </div>
+            @endif
+        </div>
+        <div>
+            <p class="text-white font-bold text-sm">{{ auth()->user()->name }}</p>
+            <p class="text-white text-opacity-70 text-xs capitalize">{{ auth()->user()->role }}</p>
+        </div>
+    </div>
+</div>
 
             {{-- Navigation --}}
-            <nav class="flex-1 p-4 space-y-2">
-                <a href="{{ route('dashboard') }}" 
-                   class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('dashboard') ? 'bg-white bg-opacity-20' : '' }}">
-                    <i class="fas fa-tachometer-alt w-5"></i>
-                    <span>Dashboard</span>
-                </a>
+           <nav class="flex-1 p-4 space-y-2">
+    <a href="{{ route('dashboard') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('dashboard') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-tachometer-alt w-5"></i>
+        <span>Dashboard</span>
+    </a>
 
-                <a href="{{ route('members.index') }}" 
-                   class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('members.*') ? 'bg-white bg-opacity-20' : '' }}">
-                    <i class="fas fa-users w-5"></i>
-                    <span>Members</span>
-                </a>
+    @if(auth()->user()->isAdmin() || auth()->user()->isStaff())
+    <a href="{{ route('members.index') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('members.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-users w-5"></i>
+        <span>Members</span>
+    </a>
+    @endif
 
-                <a href="{{ route('membership_plans.index') }}" 
-                   class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('membership_plans.*') ? 'bg-white bg-opacity-20' : '' }}">
-                    <i class="fas fa-clipboard-list w-5"></i>
-                    <span>Membership Plans</span>
-                </a>
+    @if(auth()->user()->isAdmin())
+    <a href="{{ route('membership_plans.index') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('membership_plans.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-clipboard-list w-5"></i>
+        <span>Membership Plans</span>
+    </a>
 
-                <a href="{{ route('payments.index') }}" 
-                   class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('payments.*') ? 'bg-white bg-opacity-20' : '' }}">
-                    <i class="fas fa-credit-card w-5"></i>
-                    <span>Payments</span>
-                </a>
+    <a href="{{ route('payments.index') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('payments.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-credit-card w-5"></i>
+        <span>Payments</span>
+    </a>
+    @endif
 
-                <a href="{{ route('attendance.index') }}" 
-                   class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('attendance.*') ? 'bg-white bg-opacity-20' : '' }}">
-                    <i class="fas fa-calendar-check w-5"></i>
-                    <span>Attendance</span>
-                </a>
+    @if(auth()->user()->isAdmin() || auth()->user()->isStaff())
+    <a href="{{ route('attendance.index') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('attendance.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-calendar-check w-5"></i>
+        <span>Attendance</span>
+    </a>
+    @endif
 
-                <a href="{{ route('profile.edit') }}" 
-                   class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('profile.*') ? 'bg-white bg-opacity-20' : '' }}">
-                    <i class="fas fa-user-cog w-5"></i>
-                    <span>Profile</span>
-                </a>
-            </nav>
+    <a href="{{ route('profile.edit') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('profile.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-user-cog w-5"></i>
+        <span>Profile</span>
+    </a>
+</nav>
 
             {{-- Logout --}}
             <div class="p-4 border-t border-white border-opacity-30">
