@@ -26,4 +26,14 @@ class Member extends Model
     {
         return $this->hasMany(Attendance::class);
     }
+
+    public function workoutPlans()
+{
+    return $this->hasMany(WorkoutPlan::class);
+}
+
+public function trainingSessions()
+{
+    return $this->hasMany(TrainingSession::class);
+}
 }

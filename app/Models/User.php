@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-#[Fillable(['name', 'email', 'password', 'role', 'profile_photo'])]
+#[Fillable(['name', 'email', 'password', 'role', 'profile_photo', 'phone', 'age'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
 {
@@ -40,13 +40,33 @@ public function isAdmin()
     return $this->role === 'admin';
 }
 
-public function isStaff()
+public function isTrainer()
 {
-    return $this->role === 'staff';
+    return $this->role === 'trainer';
 }
 
 public function isMember()
 {
     return $this->role === 'member';
+}
+
+public function workoutPlans()
+{
+    return $this->hasMany(WorkoutPlan::class, 'trainer_id');
+}
+
+public function trainingSessions()
+{
+    return $this->hasMany(TrainingSession::class, 'trainer_id');
+}
+
+public function notifications()
+{
+    return $this->hasMany(Notification::class);
+}
+
+public function unreadNotifications()
+{
+    return $this->hasMany(Notification::class)->where('is_read', false);
 }
 }

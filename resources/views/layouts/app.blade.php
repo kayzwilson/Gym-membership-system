@@ -73,14 +73,14 @@
 </div>
 
             {{-- Navigation --}}
-           <nav class="flex-1 p-4 space-y-2">
+<<nav class="flex-1 p-4 space-y-2">
     <a href="{{ route('dashboard') }}"
        class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('dashboard') ? 'bg-white bg-opacity-20' : '' }}">
         <i class="fas fa-tachometer-alt w-5"></i>
         <span>Dashboard</span>
     </a>
 
-    @if(auth()->user()->isAdmin() || auth()->user()->isStaff())
+    @if(auth()->user()->isAdmin() || auth()->user()->isTrainer())
     <a href="{{ route('members.index') }}"
        class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('members.*') ? 'bg-white bg-opacity-20' : '' }}">
         <i class="fas fa-users w-5"></i>
@@ -100,15 +100,45 @@
         <i class="fas fa-credit-card w-5"></i>
         <span>Payments</span>
     </a>
+
+    <a href="{{ route('reports.index') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('reports.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-chart-bar w-5"></i>
+        <span>Reports</span>
+    </a>
     @endif
 
-    @if(auth()->user()->isAdmin() || auth()->user()->isStaff())
+    @if(auth()->user()->isAdmin() || auth()->user()->isTrainer())
     <a href="{{ route('attendance.index') }}"
        class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('attendance.*') ? 'bg-white bg-opacity-20' : '' }}">
         <i class="fas fa-calendar-check w-5"></i>
         <span>Attendance</span>
     </a>
+
+    <a href="{{ route('workout_plans.index') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('workout_plans.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-dumbbell w-5"></i>
+        <span>Workout Plans</span>
+    </a>
+
+    <a href="{{ route('training_sessions.index') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('training_sessions.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-stopwatch w-5"></i>
+        <span>Training Sessions</span>
+    </a>
     @endif
+
+    {{-- Notifications for all --}}
+    <a href="{{ route('notifications.index') }}"
+       class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('notifications.*') ? 'bg-white bg-opacity-20' : '' }}">
+        <i class="fas fa-bell w-5"></i>
+        <span>Notifications</span>
+        @if(isset($unreadNotifications) && $unreadNotifications > 0)
+        <span class="ml-auto bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+            {{ $unreadNotifications }}
+        </span>
+        @endif
+    </a>
 
     <a href="{{ route('profile.edit') }}"
        class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('profile.*') ? 'bg-white bg-opacity-20' : '' }}">

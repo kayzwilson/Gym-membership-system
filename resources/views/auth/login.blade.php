@@ -101,10 +101,10 @@
                     <i class="fas fa-user-shield"></i>
                     <span>Admin</span>
                 </button>
-                <button onclick="selectRole('staff')" id="tab-staff"
+                <button onclick="selectRole('trainer')" id="tab-trainer"
                     class="role-tab flex-1 py-3 text-sm font-bold text-gray-500 transition flex items-center justify-center space-x-2">
                     <i class="fas fa-user-tie"></i>
-                    <span>Staff</span>
+                    <span>Trainer</span>
                 </button>
                 <button onclick="selectRole('member')" id="tab-member"
                     class="role-tab flex-1 py-3 text-sm font-bold text-gray-500 transition flex items-center justify-center space-x-2">
@@ -237,10 +237,10 @@
                 icon: 'fa-user-shield',
                 btn: 'Sign In as Admin'
             },
-            staff: {
-                desc: 'Login as Staff — Manage members and attendance',
+            trainer: {
+                desc: 'Login as Trainer — Manage members and attendance',
                 icon: 'fa-user-tie',
-                btn: 'Sign In as Staff'
+                btn: 'Sign In as Trainer'
             },
             member: {
                 desc: 'Login as Member — View your profile and attendance',
@@ -274,7 +274,7 @@
 
     if (role === 'member') {
         document.getElementById('member-help').classList.remove('hidden');
-    } else if (role === 'staff') {
+    } else if (role === 'trainer') {
         document.getElementById('register-link').classList.remove('hidden');
     }
 }
