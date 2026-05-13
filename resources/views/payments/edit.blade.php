@@ -46,7 +46,7 @@
                     onblur="this.style.borderColor='#e5e7eb'">
                     @foreach($plans as $plan)
                         <option value="{{ $plan->id }}" {{ $payment->membership_plan_id == $plan->id ? 'selected' : '' }}>
-                            {{ $plan->name }} - ${{ number_format($plan->price, 2) }}
+                            {{ $plan->name }} - UGX {{ number_format($plan->price, 2) }}
                         </option>
                     @endforeach
                 </select>
@@ -54,7 +54,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Amount ($)</label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Amount (UGX)</label>
                     <input type="number" name="amount" value="{{ old('amount', $payment->amount) }}" required step="0.01"
                         class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none"
                         onfocus="this.style.borderColor='#FF6B35'"

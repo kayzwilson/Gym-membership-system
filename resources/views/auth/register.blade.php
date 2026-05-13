@@ -48,7 +48,7 @@
                     <i class="fas fa-dumbbell text-white text-2xl"></i>
                 </div>
                 <h1 class="text-3xl font-black text-gray-800">ShadexGym</h1>
-                <p class="text-gray-500 mt-1">Create your staff account</p>
+                <p class="text-gray-500 mt-1" id="register-subtitle">Create your account</p>
             </div>
 
             {{-- Error Messages --}}
@@ -64,6 +64,26 @@
 
             <form method="POST" action="{{ route('register') }}" class="space-y-5">
                 @csrf
+                <input type="hidden" name="role" id="register_role" value="member">
+
+                {{-- Role Selection --}}
+                <div class="mb-6">
+                    <label class="block text-sm font-semibold text-gray-700 mb-3">
+                        <i class="fas fa-user-tag mr-2" style="color: #FF6B35"></i>Register As
+                    </label>
+                    <div class="flex rounded-xl overflow-hidden border-2 border-gray-100">
+                        <button type="button" onclick="setRegisterRole('trainer')" id="reg-tab-trainer"
+                            class="reg-tab flex-1 py-3 text-sm font-bold text-gray-500 transition flex items-center justify-center space-x-2 hover:bg-gray-50">
+                            <i class="fas fa-user-tie mr-1"></i>
+                            <span>Trainer</span>
+                        </button>
+                        <button type="button" onclick="setRegisterRole('member')" id="reg-tab-member"
+                            class="reg-tab flex-1 py-3 text-sm font-bold text-gray-500 transition flex items-center justify-center space-x-2 hover:bg-gray-50">
+                            <i class="fas fa-user mr-1"></i>
+                            <span>Member</span>
+                        </button>
+                    </div>
+                </div>
 
                 {{-- Name --}}
                 <div>
@@ -129,7 +149,8 @@
                 <button type="submit"
                     class="w-full py-3 px-6 text-white font-bold rounded-lg transition transform hover:scale-105 shadow-lg"
                     style="background: linear-gradient(135deg, #FF6B35, #FF1493)">
-                    <i class="fas fa-user-plus mr-2"></i>Create Account
+                    <i class="fas fa-user-plus mr-2"></i>
+                    <span id="register-btn-text">Create Account</span>
                 </button>
 
                 {{-- Already have account --}}
@@ -151,6 +172,31 @@
     </div>
 
     <script>
+        function setRegisterRole(role) {
+            // Update hidden input
+            document.getElementById('register_role').value = role;
+
+            // Reset all tabs
+            document.querySelectorAll('.reg-tab').forEach(tab => {
+                tab.style.background = '';
+                tab.style.color = '';
+            });
+
+            // Set active tab
+            const activeTab = document.getElementById('reg-tab-' + role);
+            activeTab.style.background = 'linear-gradient(135deg, #FF6B35, #FF1493)';
+            activeTab.style.color = 'white';
+
+            // Update subtitle and button text
+            if (role === 'trainer') {
+                document.getElementById('register-subtitle').textContent = 'Create your Trainer account';
+                document.getElementById('register-btn-text').textContent = 'Register as Trainer';
+            } else {
+                document.getElementById('register-subtitle').textContent = 'Create your Member account';
+                document.getElementById('register-btn-text').textContent = 'Register as Member';
+            }
+        }
+
         function togglePassword(fieldId, iconId) {
             const field = document.getElementById(fieldId);
             const icon = document.getElementById(iconId);
@@ -160,6 +206,16 @@
             } else {
                 field.type = 'password';
                 icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        }
+
+        // Set default on page load
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('role') === 'trainer') {
+                setRegisterRole('trainer');
+            } else {
+                setRegisterRole('member');
             }
         }
     </script>

@@ -19,6 +19,42 @@
         }
     </script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Sidebar Scrollbar */
+        nav::-webkit-scrollbar {
+            width: 4px;
+        }
+        nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        nav::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.3);
+            border-radius: 10px;
+        }
+        nav::-webkit-scrollbar-thumb:hover {
+            background: rgba(255,255,255,0.5);
+        }
+
+        /* General Page Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(#FF6B35, #FF1493);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(#FF1493, #FF6B35);
+        }
+
+        /* Smooth transitions */
+        * {
+            transition: border-color 0.2s ease;
+        }
+    </style>
 </head>
 <body class="bg-gray-100 font-sans">
 
@@ -73,7 +109,7 @@
 </div>
 
             {{-- Navigation --}}
-<<nav class="flex-1 p-4 space-y-2">
+<nav class="flex-1 p-4 space-y-2 overflow-y-auto">
     <a href="{{ route('dashboard') }}"
        class="flex items-center space-x-3 p-3 rounded-lg text-white hover:bg-white hover:bg-opacity-20 transition {{ request()->routeIs('dashboard') ? 'bg-white bg-opacity-20' : '' }}">
         <i class="fas fa-tachometer-alt w-5"></i>

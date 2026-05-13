@@ -11,7 +11,7 @@
         </div>
         <div>
             <p class="text-gray-500 text-sm">Total Revenue</p>
-            <p class="text-2xl font-bold text-gray-800">${{ number_format($totalRevenue, 2) }}</p>
+            <p class="text-2xl font-bold text-gray-800">UGX {{ number_format($totalRevenue, 2) }}</p>
         </div>
     </div>
     <div class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4">
@@ -20,7 +20,7 @@
         </div>
         <div>
             <p class="text-gray-500 text-sm">Pending Payments</p>
-            <p class="text-2xl font-bold text-gray-800">${{ number_format($pendingPayments, 2) }}</p>
+            <p class="text-2xl font-bold text-gray-800">UGX {{ number_format($pendingPayments, 2) }}</p>
         </div>
     </div>
     <div class="bg-white rounded-xl shadow-sm p-6 flex items-center space-x-4">
@@ -165,7 +165,7 @@
             <tr>
                 <td class="px-4 py-3 font-semibold text-gray-800">{{ $payment->member->user->name }}</td>
                 <td class="px-4 py-3 text-gray-600">{{ $payment->membershipPlan->name }}</td>
-                <td class="px-4 py-3 font-bold text-green-600">${{ number_format($payment->amount, 2) }}</td>
+                <td class="px-4 py-3 font-bold text-green-600">UGX {{ number_format($payment->amount, 2) }}</td>
                 <td class="px-4 py-3 text-gray-600">{{ $payment->payment_date }}</td>
             </tr>
             @empty

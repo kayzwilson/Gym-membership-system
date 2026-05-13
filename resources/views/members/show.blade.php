@@ -81,7 +81,7 @@
                 @forelse($member->payments as $payment)
                 <tr>
                     <td class="px-4 py-3">{{ $payment->membershipPlan->name }}</td>
-                    <td class="px-4 py-3 font-semibold text-green-600">${{ number_format($payment->amount, 2) }}</td>
+                    <td class="px-4 py-3 font-semibold text-green-600">UGX {{ number_format($payment->amount, 2) }}</td>
                     <td class="px-4 py-3 text-gray-600">{{ $payment->payment_date }}</td>
                     <td class="px-4 py-3">
                         <span class="px-2 py-1 rounded-full text-xs font-semibold

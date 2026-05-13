@@ -187,11 +187,11 @@
 
 <div id="register-link" class="hidden text-center mt-4">
     <p class="text-sm text-gray-600">
-        New staff member? 
-        <a href="{{ route('register') }}" 
-           class="font-bold hover:underline" style="color: #FF6B35">
-            Create Account
-        </a>
+        New trainer member? 
+       <a href="{{ route('register') }}?role=trainer" 
+   class="font-bold hover:underline" style="color: #FF6B35">
+    Create Account
+</a>
     </p>
 </div>
 

@@ -43,7 +43,7 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 <div>
-                    <label class="block text-sm font-semibold text-gray-700 mb-2">Price ($)</label>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">Price (UGX)</label>
                     <input type="number" name="price" value="{{ old('price') }}" required step="0.01" min="0"
                         class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none"
                         onfocus="this.style.borderColor='#FF6B35'"

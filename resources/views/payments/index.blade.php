@@ -33,7 +33,7 @@
                 <td class="px-6 py-4 text-gray-500">{{ $loop->iteration }}</td>
                 <td class="px-6 py-4 font-semibold text-gray-800">{{ $payment->member->user->name }}</td>
                 <td class="px-6 py-4 text-gray-600">{{ $payment->membershipPlan->name }}</td>
-                <td class="px-6 py-4 font-bold text-green-600">${{ number_format($payment->amount, 2) }}</td>
+                <td class="px-6 py-4 font-bold text-green-600">UGX {{ number_format($payment->amount, 2) }}</td>
                 <td class="px-6 py-4 text-gray-600">{{ $payment->payment_date }}</td>
                 <td class="px-6 py-4 text-gray-600 capitalize">{{ $payment->payment_method }}</td>
                 <td class="px-6 py-4">

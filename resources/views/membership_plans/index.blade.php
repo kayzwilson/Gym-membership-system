@@ -29,7 +29,7 @@
             <div class="flex items-center justify-between mb-4">
                 <div>
                     <p class="text-xs text-gray-500">Price</p>
-                    <p class="text-2xl font-bold" style="color: #FF6B35">${{ number_format($plan->price, 2) }}</p>
+                    <p class="text-2xl font-bold" style="color: #FF6B35">UGX {{ number_format($plan->price, 2) }}</p>
                 </div>
                 <div class="text-right">
                     <p class="text-xs text-gray-500">Duration</p>
