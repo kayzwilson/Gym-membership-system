@@ -83,9 +83,18 @@
         }
 
         /* ── LOGO ── */
-        .logo-block {
-            text-align: center;
-            margin-bottom: 32px;
+       .logo-block {
+             display: flex;
+             flex-direction: column;
+             align-items: center;
+             justify-content: center;
+             margin-bottom: 32px;
+             text-align: center;
+        }
+
+        .logo-block img {
+              display: block;
+              margin: 0 auto 14px auto;
         }
 
         .logo-mark {
@@ -128,6 +137,14 @@
             letter-spacing: 1.5px;
             text-transform: uppercase;
         }
+
+        .logo-image {
+    width: 64px;
+    height: 64px;
+    border-radius: 14px;
+    object-fit: cover;
+    margin-bottom: 14px;
+}
 
         .divider {
             height: 1px;
@@ -313,12 +330,18 @@
         <div class="register-card">
 
             <div class="logo-block">
-    <img src="{{ asset('images/gym-logo.png') }}" alt="IronPulse"
-         style="width:64px; height:64px; border-radius:14px; object-fit:cover; margin-bottom:14px;">
-    <span class="logo-name">Iron<span>Pulse</span></span>
-    <span class="logo-sub">Admin Portal</span>
-</div>
+              <img src="{{ asset('images/gym-logo.png') }}" 
+                alt="IronPulse"
+                class="logo-image">
 
+               <span class="logo-name">
+                    Iron<span>Pulse</span>
+               </span>
+
+                <span class="logo-sub">
+                  Admin Portal
+                  </span>
+           </div>
             <div class="divider"></div>
 
             <form method="POST" action="{{ route('register') }}">
