@@ -109,6 +109,30 @@
                         placeholder="john@example.com">
                 </div>
 
+                {{-- Phone --}}
+<div>
+    <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <i class="fas fa-phone mr-2" style="color: #FF6B35"></i>Phone Number
+    </label>
+    <input type="text" name="phone" value="{{ old('phone') }}" required
+        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none transition"
+        onfocus="this.style.borderColor='#FF6B35'"
+        onblur="this.style.borderColor='#e5e7eb'"
+        placeholder="+256 700 000000">
+</div>
+   
+     {{-- Age --}}
+<div>
+    <label class="block text-sm font-semibold text-gray-700 mb-2">
+        <i class="fas fa-calendar mr-2" style="color: #FF6B35"></i>Age
+    </label>
+    <input type="number" name="age" value="{{ old('age') }}" required min="16" max="100"
+        class="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none transition"
+        onfocus="this.style.borderColor='#FF6B35'"
+        onblur="this.style.borderColor='#e5e7eb'"
+        placeholder="25">
+</div>
+
                 {{-- Password --}}
                 <div>
                     <label class="block text-sm font-semibold text-gray-700 mb-2">

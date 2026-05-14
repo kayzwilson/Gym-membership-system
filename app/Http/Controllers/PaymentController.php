@@ -80,4 +80,10 @@ class PaymentController extends Controller
         return redirect()->route('payments.index')
             ->with('success', 'Payment deleted successfully!');
     }
+
+    public function invoice(Payment $payment)
+{
+    $payment->load('member.user', 'membershipPlan');
+    return view('payments.invoice', compact('payment'));
+}
 }

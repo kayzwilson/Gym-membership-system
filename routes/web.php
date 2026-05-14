@@ -32,6 +32,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/notifications/read-all', [NotificationController::class, 'markAllRead'])->name('notifications.readAll');
     Route::delete('/notifications/{notification}', [NotificationController::class, 'destroy'])->name('notifications.destroy');
 
+    Route::get('/payments/{payment}/invoice', [PaymentController::class, 'invoice'])->name('payments.invoice');
+
     // Admin only
     Route::middleware(['admin'])->group(function () {
         Route::resource('membership_plans', MembershipPlanController::class);
@@ -46,6 +48,7 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('workout_plans', WorkoutPlanController::class);
         Route::resource('training_sessions', TrainingSessionController::class);
     });
+
 });
 
 require __DIR__.'/auth.php';
