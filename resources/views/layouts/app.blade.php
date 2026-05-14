@@ -578,7 +578,7 @@
     <div class="main-content">
 
         <header class="topbar">
-            <span class="topbar-title">{{ $title ?? 'Dashboard' }}</span>
+            
             <div class="topbar-right">
                 <span class="topbar-date" id="topbar-date"></span>
             </div>
